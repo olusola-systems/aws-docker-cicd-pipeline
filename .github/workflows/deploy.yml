@@ -1,0 +1,40 @@
+name: Docker Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_KEY }}
+
+          script: |
+            cd /home/ec2-user
+
+            rm -rf aws-docker-cicd-pipeline || true
+
+            git clone https://github.com/olusola-systems/aws-docker-cicd-pipeline.git
+
+            cd aws-docker-cicd-pipeline
+
+            docker stop week13-container || true
+            docker rm week13-container || true
+
+            docker build -t week13-website .
+
+            docker run -d \
+              --name week13-container \
+              -p 80:80 \
+              week13-website
