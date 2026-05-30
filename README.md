@@ -7,8 +7,7 @@ This project demonstrates a complete Docker CI/CD deployment pipeline using GitH
 A simple web application is containerized with Docker, pushed to GitHub, and automatically deployed to an EC2 instance through a GitHub Actions workflow.
 
 ## Architecture
-
-<img width="2880" height="1800" alt="Architecture" src="https://github.com/user-attachments/assets/1fde3489-0ea9-4506-a95b-25ffbc0d5c93" />
+<img width="2880" height="1800" alt="Archi" src="https://github.com/user-attachments/assets/3e89545a-f239-4089-8629-b0b3cdef8fb8" />
 
 ## Technologies Used
 
